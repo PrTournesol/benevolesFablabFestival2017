@@ -1,0 +1,57 @@
+@startuml
+
+title Diagramme de classes - Gestion des bénévoles au fablab festival 2017
+
+
+class Compte{
+	idCompte
+	pseudo
+	mail
+	hashMdp
+	dateInsc
+	dateDerCo 
+	typeCompte
+	actif
+}
+
+class Benevole {
+    nom
+    prenom
+    mission
+    ville
+    competences
+    infoCompl
+    conventionSignee
+    charteSignee
+    langues
+    festival
+    chantier
+}
+
+class DispoChantier {
+    date
+    matin
+    repasMidi
+    aprem
+    repasSoir
+}
+
+class DispoFestival {
+    date
+    7-9
+    9-11
+    11-13
+    repasMidi
+    13-15
+    15-17
+    17-19
+    repasSoir
+}
+
+
+Benevole "1  " -- " 1    " Compte
+Benevole "0..*" -- "0..*" DispoChantier
+Benevole "0..*" -- "0..*" DispoFestival
+
+
+@enduml

@@ -13,13 +13,15 @@ CREATE TABLE Compte(
 	idCompte INT(4) auto_increment,
 	pseudo VARCHAR(15),
 	mail VARCHAR(35),
-	hashMdp VARCHAR(50),
-	dateInsc DATETIME(0),
+	hashMdp VARCHAR(60),
 	dateDerCo DATETIME(0),
-	typeCompte VARCHAR(15),
-	actif BOOLEAN,
+	typeCompte VARCHAR(15) DEFAULT 'Membre',
+  dateInsc DATETIME(0) DEFAULT NULL,
+  idPhp VARCHAR(13),
+  valide BOOLEAN DEFAULT FALSE,
 	CONSTRAINT pk_Compte PRIMARY KEY (idCompte),
-	CONSTRAINT uk_Compte_pseudo UNIQUE (pseudo)
+	CONSTRAINT uk_Compte_pseudo UNIQUE (pseudo),
+	CONSTRAINT uk_Compte_idPhp UNIQUE (idPhp)
 ) Engine=InnoDB;
 
 CREATE TABLE Benevole(
@@ -42,7 +44,7 @@ CREATE TABLE Benevole(
 
 CREATE TABLE DispoChantier(
 	idDispoChantier INT(6) auto_increment,
-	date DATETIME(0),
+	date DATE,
 	matin VARCHAR(10),
 	repasMidi BOOLEAN,
 	aprem VARCHAR(10),
@@ -54,7 +56,7 @@ CREATE TABLE DispoChantier(
 
 CREATE TABLE DispoFestival(
 	idDispoFestival INT(6) auto_increment,
-	date DATETIME(0),
+	date DATE,
 	septneuf VARCHAR(10),
 	neufonze VARCHAR(10),
 	onzetreize VARCHAR(10),
@@ -67,4 +69,5 @@ CREATE TABLE DispoFestival(
 	CONSTRAINT pk_DispoFestival PRIMARY KEY (idDispoFestival),
 	CONSTRAINT fk_Benevole_DispoFestival FOREIGN KEY (idBenevole) REFERENCES Benevole(idBenevole)
 ) Engine=InnoDB;
+
 

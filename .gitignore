@@ -1,6 +1,13 @@
-
-# .v4p backup files
-*~.xml
-
-# Dynamic plugins .dll
-bin/
+desktop.ini
+vm2.txt
+*.db
+.bash_history
+.bash_logout
+.bashrc
+.Xauthority
+.profile
+.gitconfig
+.ssh
+.viminfo
+.idea
+/SQL/InsertComptesAdmin.sql

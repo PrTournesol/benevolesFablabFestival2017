@@ -29,7 +29,7 @@ include("include/header.php");
 
         ?>
         <form method="POST" action="./index.php?entite=connexion"></br>
-            <label>Login :<input type="text" name="login" ></label></br>
+            <label>Pseudo :<input type="text" name="login" ></label></br>
             <label>Mot de passe :<input type="password" name="mdp" ></label></br>
             <label>Se souvenir de moi <input type="checkbox" name="rememberMe"></label></br></br>
             <input type="submit" value="Valider" />

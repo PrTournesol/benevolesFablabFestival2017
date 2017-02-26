@@ -11,3 +11,4 @@ vm2.txt
 .viminfo
 .idea
 /SQL/InsertComptesAdmin.sql
+/public_html/Modele/Connect.inc.php

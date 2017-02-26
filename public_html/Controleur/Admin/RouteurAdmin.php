@@ -1,9 +1,6 @@
 <?php
 require_once 'Controleur/ControleurConnexion.php';
 require_once 'Controleur/Admin/ControleurCompte.php';
-require_once 'Controleur/Admin/ControleurTournoi.php';
-require_once 'Controleur/Admin/ControleurClasse.php';
-require_once 'Controleur/Admin/ControleurEleve.php';
 
 
 class RouteurAdmin {

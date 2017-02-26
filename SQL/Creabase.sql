@@ -5,12 +5,16 @@ CREATE DATABASE soulie_benevoles//
 
 USE soulie_benevoles//
 
+SET FOREIGN_KEY_CHECKS=0//
+
 DROP TABLE IF EXISTS Benevole//
 DROP TABLE IF EXISTS DispoChantier//
 DROP TABLE IF EXISTS DispoFestival//
 DROP TABLE IF EXISTS Compte//
 DROP PROCEDURE IF EXISTS extractStingBeginEnd//
 DROP TRIGGER IF EXISTS t_insert_benevole_compte//
+
+SET FOREIGN_KEY_CHECKS=1//
 
 CREATE TABLE Benevole(
 	idBenevole INT(4) auto_increment,

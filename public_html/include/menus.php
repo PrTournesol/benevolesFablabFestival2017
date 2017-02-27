@@ -7,7 +7,7 @@
             echo '
                 <li><a href="index.php?entite=compte&action=R">Consulter les comptes</a></li>
                 <li><a href="index.php?entite=benevole&action=R">Consulter les bénévoles</a></li>                
-                <li><a href="index.php?entite=compte&action=R">Dispo chantier</a></li>
+                <li><a href="index.php?entite=chantier&action=C">Dispo chantier</a></li>
                 <li><a href="index.php?entite=compte&action=R">Dispo festival</a></li>
 
     

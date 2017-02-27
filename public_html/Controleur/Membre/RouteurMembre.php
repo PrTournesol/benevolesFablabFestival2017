@@ -1,6 +1,7 @@
 <?php
 require_once 'Controleur/ControleurConnexion.php';
 require_once 'Controleur/Admin/ControleurCompte.php';
+require_once 'Controleur/Membre/ControleurDispoChantier.php';
 
 class RouteurProf {
     // Route une requête entrante : exécution la bonne méthode de contrôleur en fonction de l'URL
@@ -33,12 +34,12 @@ class RouteurProf {
         if (isset($_GET['entite'])) {
             self::$ctrlCo->verifConnexion();
             switch($_GET['entite']) {
-                case 'eleve' :
+                case 'chantier' :
                     // on détermine quelle action (CRUD) on veut effectuer sur l'entité choisie
                     switch($_GET['action']) {
                         case 'C' :  // 'C' = Create = ajout d'un média...
-                            $ctrlCpt = new ControlleurCompte();
-                            $ctrlCpt->createMedia();
+                            $ctrlCpt = new ControleurDispoChantier();
+                            $ctrlCpt->addDispo();
                             break;
                         case 'R' : 	// 'R' = Read = lecture des médias ou d'un seul s'il y a un parametre id
                             if (isset($_GET['id'])) {

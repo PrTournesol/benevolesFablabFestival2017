@@ -49,8 +49,8 @@ class ControleurValidation
             }
         }
         else{
-            echo 'Redirect';
-            //header('Location:index.php?entite=connexion');
+            echo 'Redirection en cours ...';
+            header('Location:index.php');
         }
     }
 
@@ -82,9 +82,7 @@ class ControleurValidation
         }
         else
             echo 'erreur captcha';
-
     }
-
 
     private function verifPseudo(){
         $error='';
@@ -152,8 +150,9 @@ class ControleurValidation
     private function validerCompte()
     {
             $pseudo = htmlspecialchars($_POST['pseudo']);
-            if ($this->cpt->getCompteFromPseudo($pseudo)!=null)
-                $message='Ce pseudo existe déjà, veuillez en choisir un autre';
+            if ($this->cpt->getCompteFromPseudo($pseudo)!=null && $this->cpt->getCompteFromPseudo($pseudo)->idPhp!=$this->id){
+                    $message='Ce pseudo existe déjà, veuillez en choisir un autre';
+            }
             else
                 $message = $this->cpt->activCompte($pseudo,$this->pass,$this->id);
             // Vérification, à commenter TODO

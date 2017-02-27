@@ -151,11 +151,10 @@ class ModeleCompte
         try {
             $res = $conn->prepare("Update Compte set pseudo=:pPseudo, hashMdp=:pHash ,dateInsc=now() where idPhp =:pIdPhp");
             $res->execute(array('pPseudo'=>$pseudo,'pHash'=>$hashMdp,'pIdPhp'=>$idPhp));
-            $return="Le Compte avec le pseudo ".$pseudo." a été activé avec succès, vous pouvez maintenant vous connecter en suivant <a href=\"index.php\">ce lien<\\a>";
-
+            $return='Le Compte avec le pseudo '.$pseudo.' a été activé avec succès, vous pouvez maintenant vous connecter en suivant <a href=\"index.php\">ce lien<\\a>';
         }
         catch (PDOException $e){
-            $return = "Problème de création du Compte, détail de l'erreur : <br>".$e->getMessage()."<br>";
+            $return = 'Problème de création du Compte, détail de l\'erreur : <br>'.$e->getMessage().'<br>';
         }
         return $return;
     }

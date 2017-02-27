@@ -1,19 +1,5 @@
 /* GLOBALS */
 
-*,
-*:after,
-*:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-.switch {
-  margin: 50px auto;
-  position: relative;
-}
 
 .switch label {
   width: 100%;
@@ -23,9 +9,9 @@
 }
 
 .switch input {
-  top: 0; 
-  right: 0; 
-  bottom: 0; 
+  top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
   opacity: 0;
   z-index: 100;
@@ -38,8 +24,8 @@
 /* DEMO */
 
 .switch.demo {
-  width: 180px;
-  height: 50px;
+  width: 80px;
+  height: 20px;
 }
 
 .switch.demo label {
@@ -48,9 +34,6 @@
   height: 100%;
   background: #ff0d1e;
   border-radius: 40px;
-  box-shadow:
-      inset 0 3px 8px 1px rgba(0,0,0,0.2),
-      0 1px 0 rgba(255,255,255,0.5);
 }
 
 .switch.demo label:after {
@@ -138,9 +121,8 @@
   font-style: normal;
   font-weight: bold;
   color: rgb(253, 255, 253);
-  text-shadow: 0 1px 0 #bcb8ae, 0 -1px 0 #97958e;
   font-family: Helvetica, Arial, sans-serif;
-  font-size: 24px;
+  font-size: 15px;
   position: absolute;
   top: 50%;
   margin-top: -12px;

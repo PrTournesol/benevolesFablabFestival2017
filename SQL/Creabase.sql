@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS DispoFestival//
 DROP TABLE IF EXISTS Compte//
 DROP PROCEDURE IF EXISTS extractStingBeginEnd//
 DROP TRIGGER IF EXISTS t_insert_benevole_compte//
-DROP TRIGGER IF EXISTS t_delete_benevole_compte//
+DROP TRIGGER IF EXISTS t_delete_compte_benevole//
 
 SET FOREIGN_KEY_CHECKS=1//
 
@@ -82,7 +82,7 @@ create PROCEDURE extractStingBeginEnd(IN chaine VARCHAR(500), IN chDebut VARCHAR
   BEGIN
     DECLARE debut INT;
     DECLARE fin INT;
-    set @debut= locate(chDebut, chaine) + 6;
+    set @debut= locate(chDebut, chaine) + length(chDebut);
     SET @fin= locate(chFin, chaine) - @debut;
     SET result=substring(chaine, @debut,@fin);
 END//
@@ -91,12 +91,15 @@ END//
 CREATE TRIGGER t_insert_benevole_compte
   AFTER INSERT ON Benevole FOR EACH ROW
   BEGIN
-    DECLARE para VARCHAR(35);
-    call extractStingBeginEnd(NEW.infoCompl,'<mail>','</mail>',@para);
-    INSERT INTO Compte(mail,valide,idBenevole) VALUES (@para,1,NEW.idBenevole);
+    DECLARE mail VARCHAR(35);
+		DECLARE idphp VARCHAR(13);
+    call extractStingBeginEnd(NEW.infoCompl,'<mail>','</mail>',@mail);
+		call extractStingBeginEnd(NEW.infoCompl,'<idphp>','</idphp>',@idphp);
+    INSERT INTO Compte(mail,valide,idBenevole,idphp) VALUES (@mail,1,NEW.idBenevole,@idphp);
 END//
 
 
-CREATE TRIGGER t_delete_benevole_compte
+CREATE TRIGGER t_delete_compte_benevole
   BEFORE DELETE ON Benevole FOR EACH ROW
 	DELETE FROM Compte WHERE Compte.idBenevole=OLD.idBenevole//
+

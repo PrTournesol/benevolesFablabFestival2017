@@ -59,8 +59,11 @@ class ControleurCompte
         }
         $vCompte= $this->cpt->getCompteFromId($idCompte);
         include 'Vue/Admin/VueModifierCompte.php';
+    }
 
-
+    public function deleteCompte($idCompte){
+       $this->cpt->deleteCompte($idCompte);
+       header ('Location:index.php?entite=compte&action=R');
     }
 
 

@@ -22,7 +22,7 @@ include("include/header.php");
                 echo ("<h1>".htmlspecialchars($_GET["err"])."</h1>");
             }
             else{
-                echo ("Veuillez enter les identifiants pour accéder aux données :");
+                echo ("Veuillez enter les identifiants pour accéder à l'espace sécurisé :");
             }
             echo ("<div id=formCo\">");
         }

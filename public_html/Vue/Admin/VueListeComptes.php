@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="./include/styles.css" />
-    <title>Mon site !</title>
+    <title>Liste des comptes</title>
 </head>
 <body>
 <?php
@@ -14,6 +14,8 @@ include("./include/header.php");
 <div class="wrapper">
     <?php include("./include/menus.php"); ?>
     <section id="content">
+        <h1>Liste des comptes</h1>
+        <br>
         <center>
             <table border="2">
                 <tbody>
@@ -31,8 +33,11 @@ include("./include/header.php");
                     foreach ($vListeComptes as $cpt) {
                         echo '<tr><td align="center"><a href="index.php?entite=compte&action=R&id='.$cpt->idCompte.'">'.$cpt->idCompte.'</a></td>';
                         echo '<td>'.$cpt->pseudo.'</td><td>'.$cpt->mail.'</td><td>'.$cpt->dateInsc.'</td><td>'.$cpt->dateDerCo.'</td><td>'.$cpt->typeCompte.'</td><td>'.$cpt->valide.'</td><td align="center"><a href="index.php?entite=benevole&action=R&id='.$cpt->idBenevole.'">'.$cpt->idBenevole.'</a>
-                        <td align="center"><a href="index.php?entite=compte&action=U&id='.$cpt->idCompte.'"><img src="./Vue/images/modifier.jpg" alt="image modifier" height="30"></a></td>
-                        <td align="center"><a href="index.php?entite=compte&action=D&id='.$cpt->idCompte.'"><img src="./Vue/images/supprimer.jpg" alt="image supprimer" height="30"></a></td></tr>';
+                        <td align="center"><a href="index.php?entite=compte&action=U&id='.$cpt->idCompte.'"><img src="./Vue/images/modifier.jpg" alt="image modifier" height="30"></a></td>';
+                        if ($cpt->idBenevole!='')
+                            echo '<td align="center"><a href="index.php?entite=benevole&action=D&id='.$cpt->idBenevole.'&return=compte"><img src="./Vue/images/supprimer.jpg" alt="image supprimer" height="30"></a></td></tr>';
+                        else
+                            echo '<td align="center"><a href="index.php?entite=compte&action=D&id='.$cpt->idCompte.'"><img src="./Vue/images/supprimer.jpg" alt="image supprimer" height="30"></a></td></tr>';
                     }
                 }
                 else {

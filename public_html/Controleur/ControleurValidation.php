@@ -60,12 +60,15 @@ class ControleurValidation
             $this->message.='<br>Lien incorrect';
             header('Location:index.php?entite=validation&message=' . $this->message);
         }
+        elseif ($this->compte->dateInsc!=''){
+            header('Location:index.php');
+        }
     }
 
     private function verifMail(){
         $this->mail=$_POST['mail'];
         if (strcmp($this->compte->mail,$this->mail)!=0){
-            $this->message.='<br>le mail ne correspond pas '.$this->compte->mail.' '.strcmp($this->compte->mail,$this->mail);
+            $this->message.='<br>le mail ne correspond pas ';
         }
 
     }
@@ -149,13 +152,10 @@ class ControleurValidation
     private function validerCompte()
     {
             $pseudo = htmlspecialchars($_POST['pseudo']);
-            $mail = htmlspecialchars($_POST['mail']);
             if ($this->cpt->getCompteFromPseudo($pseudo)!=null)
                 $message='Ce pseudo existe déjà, veuillez en choisir un autre';
-            elseif ($this->cpt->getCompteFromIdPhp($this->id)!=null)
-                $message='Ce compte a déjà été activé';
             else
-                $message = $this->cpt->activCompte($pseudo, $mail,$this->pass,$this->id);
+                $message = $this->cpt->activCompte($pseudo,$this->pass,$this->id);
             // Vérification, à commenter TODO
             //$message = $message . '<br> pseudo : ' . $pseudo . ' ;mail : ' . $mail . ' ; pass : ' . $this->pass.'<br>';
             $this->message.='<br>'.$message;

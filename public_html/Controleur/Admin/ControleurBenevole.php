@@ -12,24 +12,24 @@ include_once ('Modele/ModeleBenevole.php');
 class ControleurBenevole
 {
 
-    private $cpt;
+    private $bene;
 
     /**
      * ControlleurBenevole constructor.
      */
     public function __construct()
     {
-        $this->cpt = new ModeleBenevole();
+        $this->bene = new ModeleBenevole();
     }
 
 
     public function getListeBenevoles(){
-        $vListeBenevoles= $this->cpt->getListeBenevoles();
+        $vListeBenevoles= $this->bene->getListeBenevoles();
         include 'Vue/Admin/VueListeBenevoles.php';
     }
 
     public function getBenevoleFromId($idBenevole){
-        $vBenevole= $this->cpt->getBenevoleFromId($idBenevole);
+        $vBenevole= $this->bene->getBenevoleFromId($idBenevole);
         include 'Vue/Admin/VueBenevole.php';
     }
 
@@ -63,8 +63,9 @@ class ControleurBenevole
             $mail=htmlspecialchars($_POST['mail']);
             if ($mail!='')
                 $infoCompl.='<mail>'.$mail.'</mail>';
-            $benevole=new Benevole('',$nom,$prenom,$mission,$ville,$competences,$infoCompl,$conventionSignee,$charteSignee,$langues,$festival,$chantier);
-            $message = $this->cpt->newBenevole($benevole);
+            $infoCompl.='<idphp>'.uniqid().'</idphp>';
+            $benevole=new Benevole('',$nom,$prenom,$mission,$ville,$competences,$infoCompl,$conventionSignee,$charteSignee,$langues,$festival,$chantier,'');
+            $message = $this->bene->newBenevole($benevole);
             // Vérification, à commenter TODO
             $message = $message;
         }
@@ -72,18 +73,45 @@ class ControleurBenevole
     }
 
     public function updateBenevole($idBenevole){
-        if (isset($_POST['pseudo'])){
-            $pseudo=htmlspecialchars($_POST['pseudo']);
-            $mail=htmlspecialchars($_POST['mail']);
-            $valide=htmlspecialchars($_POST['valide']);
-            $idBenevole=htmlspecialchars($_POST['idBene']);
-            $type=htmlspecialchars($_POST['type']);
-            $compte=new Benevole($idBenevole,$pseudo,$mail,'','',$type,'','',$valide,$idBenevole);
-            $message = $this->cpt->updateBenevole($compte);
-        }
-        $vBenevole= $this->cpt->getBenevoleFromId($idBenevole);
-        include 'Vue/Admin/VueModifierBenevole.php';
+        if (isset($_POST['nom'])){
+            $nom=htmlspecialchars($_POST['nom']);
+            $prenom=htmlspecialchars($_POST['prenom']);
+            $mission=htmlspecialchars($_POST['mission']);
+            $ville=htmlspecialchars($_POST['ville']);
+            $competences=htmlspecialchars($_POST['competences']);
+            $infoCompl=htmlspecialchars($_POST['infoCompl']);
 
+            if (isset($_POST['conv']))
+                $conventionSignee=1;
+            else
+                $conventionSignee=0;
+            if (isset($_POST['charte']))
+                $charteSignee=1;
+            else
+                $charteSignee=0;
+            $langues=htmlspecialchars($_POST['langues']);
+            if (isset($_POST['festival']))
+                $festival=1;
+            else
+                $festival=0;
+            if (isset($_POST['chantier']))
+                $chantier=1;
+            else
+                $chantier=0;
+            $benevole=new Benevole($idBenevole,$nom,$prenom,$mission,$ville,$competences,$infoCompl,$conventionSignee,$charteSignee,$langues,$festival,$chantier,'');
+            $message = $this->bene->updateBenevole($benevole);
+        }
+        $vBenevole= $this->bene->getBenevoleFromId($idBenevole);
+        include 'Vue/Admin/VueModifierBenevole.php';
+    }
+
+    public function deleteBenevole($idBenevole){
+        $this->bene->deleteBenevole($idBenevole);
+        if (isset($_GET['return']))
+            header('Location:index.php?entite='.$_GET['return']);
+
+        else
+            header ('Location:index.php?entite=benevole&action=R');
 
     }
 

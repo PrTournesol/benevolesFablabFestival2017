@@ -20,6 +20,7 @@ class Benevole
     public $langues;
     public $festival;
     public $chantier;
+    public $idCompte;
 
     /**
      * Benevole constructor.
@@ -35,8 +36,9 @@ class Benevole
      * @param $langues
      * @param $festival
      * @param $chantier
+     * @param $idCompte
      */
-    public function __construct($idBenevole, $nom, $prenom, $mission, $ville, $competences, $infoCompl, $conventionSignee, $charteSignee, $langues, $festival, $chantier)
+    public function __construct($idBenevole, $nom, $prenom, $mission, $ville, $competences, $infoCompl, $conventionSignee, $charteSignee, $langues, $festival, $chantier, $idCompte)
     {
         $this->idBenevole = $idBenevole;
         $this->nom = $nom;
@@ -50,6 +52,7 @@ class Benevole
         $this->langues = $langues;
         $this->festival = $festival;
         $this->chantier = $chantier;
+        $this->idCompte = $idCompte;
     }
 
 

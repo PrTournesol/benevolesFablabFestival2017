@@ -146,12 +146,12 @@ class ModeleCompte
         return $return;
     }
 
-    public function activCompte($pseudo, $mail, $hashMdp,$idPhp){
+    public function activCompte($pseudo, $hashMdp,$idPhp){
         global $conn;
         try {
-            $res = $conn->prepare("Insert into Compte(pseudo,mail,hashMdp,idPhp,dateInsc) values  (:pPseudo,:pMail,:pHash,:pIdPhp, now())");
-            $res->execute(array('pPseudo'=>$pseudo,'pMail'=>$mail,'pMail'=>$mail,'pHash'=>$hashMdp,'pIdPhp'=>$idPhp));
-            $return="Le Compte avec le pseudo ".$pseudo." a été crée avec succès";
+            $res = $conn->prepare("Update Compte set pseudo=:pPseudo, hashMdp=:pHash ,dateInsc=now() where idPhp =:pIdPhp");
+            $res->execute(array('pPseudo'=>$pseudo,'pHash'=>$hashMdp,'pIdPhp'=>$idPhp));
+            $return="Le Compte avec le pseudo ".$pseudo." a été activé avec succès, vous pouvez maintenant vous connecter en suivant <a href=\"index.php\">ce lien<\\a>";
 
         }
         catch (PDOException $e){
@@ -180,8 +180,18 @@ class ModeleCompte
             $return = "Problème de modification du Compte, détail de l'erreur : <br>".$e->getMessage()."<br>";
         }
         return $return;
+    }
 
-
+    public function deleteCompte($idCompte){
+        global $conn;
+        try {
+            $res = $conn->prepare("Delete from Compte where idCompte = :pIdCompte");
+            $res->execute(array('pIdCompte' => $idCompte));
+        }
+        catch (PDOException $e){
+            echo "Problème de suppresion du compte dans la base de données, détail de l'erreur : ".$e->getMessage()."<br>";
+            die();
+        }
     }
 
 

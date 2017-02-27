@@ -41,28 +41,31 @@ class RouteurAdmin {
                 case 'compte' :
                     $ctrlCpt = new ControleurCompte();
                     // on détermine quelle action (CRUD) on veut effectuer sur l'entité choisie
-                    switch($_GET['action']) {
-                        case 'C' :  // 'C' = Create = ajout d'un média...
-                            $ctrlCpt->createCompte();
-                            break;
-                        case 'R' : 	// 'R' = Read = lecture des médias ou d'un seul s'il y a un parametre id
-                            if (isset($_GET['id'])) {
-                                $ctrlCpt->getCompteFromId($_GET['id']);
-                            }
-                            else {
+                    if (isset($_GET['action']))
+                        switch($_GET['action']) {
+                            case 'C' :  // 'C' = Create = ajout d'un média...
+                                $ctrlCpt->createCompte();
+                                break;
+                            case 'R' : 	// 'R' = Read = lecture des médias ou d'un seul s'il y a un parametre id
+                                if (isset($_GET['id'])) {
+                                    $ctrlCpt->getCompteFromId($_GET['id']);
+                                }
+                                else {
+                                    $ctrlCpt->getListeComptes();
+                                }
+                                break;
+                            case 'U' : 	// 'U' = Update = modification d'un média à partir de son id
+                                $ctrlCpt->updateCompte($_GET['id']);
+                                break;
+                            case 'D' : 	// 'D' = Delete = suppression d'un média à partir de son id
+                                $ctrlCpt->deleteCompte($_GET['id']);
+                                break;
+                            default: 	// pour toutes les autres valeurs du parametre 'action', on affiche la liste des médias
                                 $ctrlCpt->getListeComptes();
-                            }
-                            break;
-                        case 'U' : 	// 'U' = Update = modification d'un média à partir de son id
-                            $ctrlCpt->updateCompte($_GET['id']);
-                            break;
-                        case 'D' : 	// 'D' = Delete = suppression d'un média à partir de son id
-                            $ctrlCpt->deleteCompte($_GET['id']);
-                            break;
-                        default: 	// pour toutes les autres valeurs du parametre 'action', on affiche la liste des médias
-                            $ctrlCpt->getListeComptes();
-                            break;
-                    }
+                                break;
+                        }
+                    else
+                        $ctrlCpt->getListeComptes();
                     break;
 
                 case 'benevole' :
@@ -81,7 +84,7 @@ class RouteurAdmin {
                             break;
 
                         case 'U' : 	// 'U' = Update = modification d'un groupe à partir de son id
-                            $ctrlTrn->setBenevole($_GET['id']);
+                            $ctrlTrn->updateBenevole($_GET['id']);
                             break;
                         case 'D' : 	// 'D' = Delete = suppression d'un groupe à partir de son id
                             $ctrlTrn->deleteBenevole($_GET['id']);

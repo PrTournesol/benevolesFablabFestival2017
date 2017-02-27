@@ -14,10 +14,12 @@ include("./include/header.php");
 <div class="wrapper">
     <?php include("./include/menus.php"); ?>
     <section id="content">
+        <h1>Liste des bénévoles</h1>
+        <br>
         <center>
             <table border="2">
                 <tbody>
-                <tr><th>id Benevole</th><th>pseudo</th><th>mail</th><th>date d'inscription</th><th>date de dernière connexion</th><th>type de benevole</th><th>Validé ?</th><th>idBénévole</th><th>Modifier</th><th>Supprimer</th></tr>
+                <tr><th>id Benevole</th><th>Prénom</th><th>Nom</th><th>Ville</th><th>Mission</th><th>Compétences</th><th>convention</th><th>charte</th><th>langues</th><th>festival</th><th>chantier</th><th>idCompte</th><th>Modifier</th><th>Supprimer</th></tr>
                 </tbody>
                 <?php
                 /**
@@ -28,11 +30,11 @@ include("./include/header.php");
                  */
 
                  if (count($vListeBenevoles) >= 1) {
-                    foreach ($vListeBenevoles as $cpt) {
-                        echo '<tr><td align="center"><a href="index.php?entite=benevole&action=R&id='.$cpt->idBenevole.'">'.$cpt->idBenevole.'</a></td>';
-                        echo '<td>'.$cpt->pseudo.'</td><td>'.$cpt->mail.'</td><td>'.$cpt->dateInsc.'</td><td>'.$cpt->dateDerCo.'</td><td>'.$cpt->typeBenevole.'</td><td>'.$cpt->valide.'</td><td align="center"><a href="index.php?entite=benevole&action=R&id='.$cpt->idBenevole.'">'.$cpt->idBenevole.'</a>
-                        <td align="center"><a href="index.php?entite=benevole&action=U&id='.$cpt->idBenevole.'"><img src="./Vue/images/modifier.jpg" alt="image modifier" height="30"></a></td>
-                        <td align="center"><a href="index.php?entite=benevole&action=D&id='.$cpt->idBenevole.'"><img src="./Vue/images/supprimer.jpg" alt="image supprimer" height="30"></a></td></tr>';
+                    foreach ($vListeBenevoles as $bene) {
+                        echo '<tr><td align="center"><a href="index.php?entite=benevole&action=R&id='.$bene->idBenevole.'">'.$bene->idBenevole.'</a></td>';
+                        echo '<td>'.$bene->prenom.'</td><td>'.$bene->nom.'</td><td>'.$bene->ville.'</td><td>'.$bene->mission.'</td><td>'.$bene->competences.'</td><td>'.$bene->conventionSignee.'</td><td>'.$bene->charteSignee.'</td><td>'.$bene->langues.'</td><td>'.$bene->festival.'</td><td>'.$bene->chantier.'</td><td align="center"><a href="index.php?entite=compte&action=R&id='.$bene->idCompte.'">'.$bene->idCompte.'</a>
+                        <td align="center"><a href="index.php?entite=benevole&action=U&id='.$bene->idBenevole.'"><img src="./Vue/images/modifier.jpg" alt="image modifier" height="30"></a></td>
+                        <td align="center"><a href="index.php?entite=benevole&action=D&id='.$bene->idBenevole.'"><img src="./Vue/images/supprimer.jpg" alt="image supprimer" height="30"></a></td></tr>';
                     }
                 }
                 else {

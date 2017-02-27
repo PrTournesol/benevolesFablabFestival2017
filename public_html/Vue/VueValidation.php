@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="./include/styles.css" />
-    <title>Espace bénévole</title>
+    <title>Validation compte</title>
 </head>
 <body>
 <?php
@@ -11,6 +11,8 @@ include("include/header.php");
 ?>
 <div class="wrapper">
     <section id="content">
+        <h1>Validation de votre compte</h1>
+        <br>
         <center>
             <?php
             if (isset($_GET['message']))
@@ -20,8 +22,8 @@ include("include/header.php");
                 <table border="2">
                     <tr><th>Pseudo : </th><td><input type="text" name="pseudo" required <?php if (isset($pseudo)) echo 'value="'.$pseudo.'"';?>></td></tr>
                     <tr><th>Adresse mail : </th><td><input type="email" name="mail" required <?php if (isset($mail)) echo 'value="'.$mail.'"';?>></td></tr>
-                    <tr><th>Mot de passe : </th><td><input type="password" name="pass" required pattern=".{3,}" required title="6 charactères minimim" value="azerty4"></td></tr>
-                    <tr><th>Confirmation : </th><td><input type="password" name="pass2" required value="azerty4"></td></tr>
+                    <tr><th>Mot de passe : </th><td><input type="password" name="pass" required pattern=".{3,}" required title="6 charactères minimim" ></td></tr>
+                    <tr><th>Confirmation : </th><td><input type="password" name="pass2" required ></td></tr>
 
                     <tr>
                         <th>

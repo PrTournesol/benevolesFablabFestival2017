@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS DispoFestival//
 DROP TABLE IF EXISTS Compte//
 DROP PROCEDURE IF EXISTS extractStingBeginEnd//
 DROP TRIGGER IF EXISTS t_insert_benevole_compte//
+DROP TRIGGER IF EXISTS t_delete_benevole_compte//
 
 SET FOREIGN_KEY_CHECKS=1//
 
@@ -24,11 +25,11 @@ CREATE TABLE Benevole(
 	ville VARCHAR(20),
 	competences VARCHAR(100),
 	infoCompl VARCHAR(500),
-	conventionSignee TINYINT(1),
-	charteSignee TINYINT(1),
+	conventionSignee BOOLEAN DEFAULT FALSE,
+	charteSignee BOOLEAN DEFAULT FALSE,
 	langues VARCHAR(50),
-	festival BOOLEAN,
-	chantier BOOLEAN,
+	festival BOOLEAN DEFAULT FALSE,
+	chantier BOOLEAN DEFAULT FALSE,
 	CONSTRAINT pk_Benevole PRIMARY KEY (idBenevole)
 ) Engine=InnoDB//
 
@@ -88,10 +89,14 @@ END//
 
 
 CREATE TRIGGER t_insert_benevole_compte
-  BEFORE INSERT ON Benevole FOR EACH ROW
+  AFTER INSERT ON Benevole FOR EACH ROW
   BEGIN
     DECLARE para VARCHAR(35);
     call extractStingBeginEnd(NEW.infoCompl,'<mail>','</mail>',@para);
-    set NEW.infoCompl='';
     INSERT INTO Compte(mail,valide,idBenevole) VALUES (@para,1,NEW.idBenevole);
-  END//
+END//
+
+
+CREATE TRIGGER t_delete_benevole_compte
+  BEFORE DELETE ON Benevole FOR EACH ROW
+	DELETE FROM Compte WHERE Compte.idBenevole=OLD.idBenevole//

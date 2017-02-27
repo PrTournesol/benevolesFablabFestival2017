@@ -17,7 +17,7 @@ include("./include/header.php");
         <center>
             <table border="2">
                 <tbody>
-                <tr><th>id Compte</th><th>pseudo</th><th>mail</th><th>date d'inscription</th><th>date de dernière connexion</th><th>type de compte</th><th>Validé ?</th><th>Modifier</th><th>Supprimer</th></tr>
+                <tr><th>id Compte</th><th>pseudo</th><th>mail</th><th>date d'inscription</th><th>date de dernière connexion</th><th>type de compte</th><th>Validé ?</th><th>idBénévole</th><th>Modifier</th><th>Supprimer</th></tr>
                 </tbody>
                 <?php
                 /**
@@ -30,7 +30,7 @@ include("./include/header.php");
                  if (count($vListeComptes) >= 1) {
                     foreach ($vListeComptes as $cpt) {
                         echo '<tr><td align="center"><a href="index.php?entite=compte&action=R&id='.$cpt->idCompte.'">'.$cpt->idCompte.'</a></td>';
-                        echo '<td>'.$cpt->pseudo.'</td><td>'.$cpt->mail.'</td><td>'.$cpt->dateInsc.'</td><td>'.$cpt->dateDerCo.'</td><td>'.$cpt->typeCompte.'</td><td>'.$cpt->valide.'</td>
+                        echo '<td>'.$cpt->pseudo.'</td><td>'.$cpt->mail.'</td><td>'.$cpt->dateInsc.'</td><td>'.$cpt->dateDerCo.'</td><td>'.$cpt->typeCompte.'</td><td>'.$cpt->valide.'</td><td align="center"><a href="index.php?entite=benevole&action=R&id='.$cpt->idBenevole.'">'.$cpt->idBenevole.'</a>
                         <td align="center"><a href="index.php?entite=compte&action=U&id='.$cpt->idCompte.'"><img src="./Vue/images/modifier.jpg" alt="image modifier" height="30"></a></td>
                         <td align="center"><a href="index.php?entite=compte&action=D&id='.$cpt->idCompte.'"><img src="./Vue/images/supprimer.jpg" alt="image supprimer" height="30"></a></td></tr>';
                     }

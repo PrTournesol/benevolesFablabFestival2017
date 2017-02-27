@@ -24,6 +24,7 @@
                         echo '<tr><th>type de compte : </th><td>'.$vCompte->typeCompte.'</td></tr>';
                         echo '<tr><th>IdentifiantPhp : </th><td>'.$vCompte->idPhp.'</td></tr>';
                         echo '<tr><th>Validé par un admin ? : </th><td>'.$vCompte->valide.'</td></tr>';
+                        echo '<tr><th>idBenevole associé : </th><td><a href="index.php?entite=benevole&action=R&id='.$vCompte->idBenevole.'">'.$vCompte->idBenevole.'</a></td></tr>';
                         ?>
                     </table>
                 </center>

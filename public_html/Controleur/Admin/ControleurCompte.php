@@ -39,12 +39,28 @@ class ControleurCompte
             $pseudo=htmlspecialchars($_POST['pseudo']);
             $mail=htmlspecialchars($_POST['mail']);
             $valide=htmlspecialchars($_POST['valide']);
-            $message = $this->cpt->newCompte($pseudo,$mail,$valide);
+            $message = $this->cpt->newCompte($pseudo,$mail,$valide,uniqid());
             // Vérification, à commenter TODO
-            $message = $message.' pseudo : '.$pseudo.' ;mail : '.$mail.' ; valdie : '.$valide;
+            $message = $message.' pseudo : '.$pseudo.' ;mail : '.$mail.' ; validé ? : '.$valide;
 
         }
         include 'Vue/Admin/VueCreerCompte.php';
+    }
+
+    public function updateCompte($idCompte){
+        if (isset($_POST['pseudo'])){
+            $pseudo=htmlspecialchars($_POST['pseudo']);
+            $mail=htmlspecialchars($_POST['mail']);
+            $valide=htmlspecialchars($_POST['valide']);
+            $idBenevole=htmlspecialchars($_POST['idBene']);
+            $type=htmlspecialchars($_POST['type']);
+            $compte=new Compte($idCompte,$pseudo,$mail,'','',$type,'','',$valide,$idBenevole);
+            $message = $this->cpt->updateCompte($compte);
+        }
+        $vCompte= $this->cpt->getCompteFromId($idCompte);
+        include 'Vue/Admin/VueModifierCompte.php';
+
+
     }
 
 

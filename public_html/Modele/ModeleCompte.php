@@ -16,7 +16,7 @@ class ModeleCompte
     public function getCompteFromId($idCompte){
         global $conn;
         try {
-            $res = $conn->prepare("Select * from compte where idCompte = :pIdCompte");
+            $res = $conn->prepare("Select * from Compte where idCompte = :pIdCompte");
             $res->execute(array('pIdCompte' => $idCompte));
         }
         catch (PDOException $e){
@@ -33,14 +33,15 @@ class ModeleCompte
                                 $cpt['typeCompte'],
                                 $cpt['dateInsc'],
                                 $cpt['idPhp'],
-                                $cpt['valide']);
+                                $cpt['valide'],
+                                $cpt['idBenevole']);
         return $leCompte;
     }
 
     public function getCompteFromIdPhp($idPhp){
         global $conn;
         try {
-            $res = $conn->prepare("Select * from compte where idPhp = :pIdPhp");
+            $res = $conn->prepare("Select * from Compte where idPhp = :pIdPhp");
             $res->execute(array('pIdPhp' => $idPhp));
         }
         catch (PDOException $e){
@@ -59,14 +60,15 @@ class ModeleCompte
             $cpt['typeCompte'],
             $cpt['dateInsc'],
             $cpt['idPhp'],
-            $cpt['valide']);
+            $cpt['valide'],
+            $cpt['idBenevole']);
         return $leCompte;
     }
 
     public function getCompteFromPseudo($pseudo){
         global $conn;
         try {
-            $res = $conn->prepare("Select * from compte where pseudo = :pPseudo");
+            $res = $conn->prepare("Select * from Compte where pseudo = :pPseudo");
             $res->execute(array('pPseudo' => $pseudo));
         }
         catch (PDOException $e){
@@ -85,14 +87,15 @@ class ModeleCompte
             $cpt['typeCompte'],
             $cpt['dateInsc'],
             $cpt['idPhp'],
-            $cpt['valide']);
+            $cpt['valide'],
+            $cpt['idBenevole']);
         return $leCompte;
     }
 
     public function getListeComptes(){
         global $conn;
         try {
-            $res = $conn->prepare("Select * from compte");
+            $res = $conn->prepare("Select * from Compte");
             $res->execute();
         }
         catch (PDOException $e){
@@ -109,7 +112,8 @@ class ModeleCompte
                 $cpt['typeCompte'],
                 $cpt['dateInsc'],
                 $cpt['idPhp'],
-                $cpt['valide']);
+                $cpt['valide'],
+                $cpt['idBenevole']);
         }
         return $ListeCpts;
     }
@@ -117,7 +121,7 @@ class ModeleCompte
     public function majDateConnexion($pseudo,$idPhp ){
         global $conn;
         try {
-            $res = $conn->prepare("update compte set idPhp=:pUid,dateDerCo=NOW() where pseudo=:pPseudo");
+            $res = $conn->prepare("update Compte set idPhp=:pUid,dateDerCo=NOW() where pseudo=:pPseudo");
             $res->execute(array('pPseudo' => $pseudo, 'pUid'=>$idPhp));
         }
         catch (PDOException $e){
@@ -126,18 +130,18 @@ class ModeleCompte
         }
     }
 
-    public function newCompte($pseudo, $mail, $valide){
+    public function newCompte($pseudo, $mail, $valide,$idPhp){
         if ($this->getCompteFromPseudo($pseudo)!=null)
             return "Ce pseudo existe déjà, veuillez en choisir un autre";
         global $conn;
         try {
-            $res = $conn->prepare("Insert into compte(pseudo,mail,valide) values  (:pPseudo,:pMail,:pValide)");
-            $return = $res->execute(array('pPseudo'=>$pseudo,'pMail'=>$mail,'pMail'=>$mail,'pValide'=>$valide));
+            $res = $conn->prepare("Insert into Compte(pseudo,mail,valide,idPhp) values  (:pPseudo,:pMail,:pValide,:pIdPhp)");
+            $res->execute(array('pPseudo'=>$pseudo,'pMail'=>$mail,'pMail'=>$mail,'pValide'=>$valide,'pIdPhp'=>$idPhp));
             $return="Compte avec le pseudo ".$pseudo." crée avec succès";
 
         }
         catch (PDOException $e){
-            $return = "Problème de création du compte, détail de l'erreur : <br>".$e->getMessage()."<br>";
+            $return = "Problème de création du Compte, détail de l'erreur : <br>".$e->getMessage()."<br>";
         }
         return $return;
     }
@@ -145,15 +149,39 @@ class ModeleCompte
     public function activCompte($pseudo, $mail, $hashMdp,$idPhp){
         global $conn;
         try {
-            $res = $conn->prepare("Insert into compte(pseudo,mail,hashMdp,idPhp,dateInsc) values  (:pPseudo,:pMail,:pHash,:pIdPhp, now())");
-            $return = $res->execute(array('pPseudo'=>$pseudo,'pMail'=>$mail,'pMail'=>$mail,'pHash'=>$hashMdp,'pIdPhp'=>$idPhp));
-            $return="Le compte avec le pseudo ".$pseudo." a été crée avec succès";
+            $res = $conn->prepare("Insert into Compte(pseudo,mail,hashMdp,idPhp,dateInsc) values  (:pPseudo,:pMail,:pHash,:pIdPhp, now())");
+            $res->execute(array('pPseudo'=>$pseudo,'pMail'=>$mail,'pMail'=>$mail,'pHash'=>$hashMdp,'pIdPhp'=>$idPhp));
+            $return="Le Compte avec le pseudo ".$pseudo." a été crée avec succès";
 
         }
         catch (PDOException $e){
-            $return = "Problème de création du compte, détail de l'erreur : <br>".$e->getMessage()."<br>";
+            $return = "Problème de création du Compte, détail de l'erreur : <br>".$e->getMessage()."<br>";
         }
         return $return;
+    }
+
+    public function updateCompte($compte){
+        global $conn;
+        try {
+            if ($compte->idBenevole!='')
+            {
+                $res = $conn->prepare("UPDATE `Compte` SET `pseudo`= :pPseudo, `mail`=:pMail, `typeCompte` = :pType, `valide` = :pValide, `idBenevole`= :pIdBenevole WHERE `idCompte` = :pIdCompte");
+                $res->execute(array('pPseudo'=>$compte->pseudo,'pMail'=>$compte->mail, 'pType'=>$compte->typeCompte,'pValide'=>$compte->valide, 'pIdBenevole'=>$compte->idBenevole,'pIdCompte'=>$compte->idCompte));
+
+            }
+            else {
+                $res = $conn->prepare("UPDATE `Compte` SET `pseudo`= :pPseudo, `mail`=:pMail, `typeCompte` = :pType, `valide` = :pValide WHERE `idCompte` = :pIdCompte");
+                $res->execute(array('pPseudo'=>$compte->pseudo,'pMail'=>$compte->mail, 'pType'=>$compte->typeCompte,'pValide'=>$compte->valide, 'pIdCompte'=>$compte->idCompte));
+            }
+            $return="Le Compte avec le pseudo ".$compte->pseudo." a été modifié avec succès";
+
+        }
+        catch (PDOException $e){
+            $return = "Problème de modification du Compte, détail de l'erreur : <br>".$e->getMessage()."<br>";
+        }
+        return $return;
+
+
     }
 
 

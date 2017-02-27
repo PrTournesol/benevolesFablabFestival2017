@@ -28,7 +28,7 @@ class ControleurValidation
     }
 
 
-    public function default(){
+    public function defaut(){
         if (isset($_GET['id'])){
             $this->id=htmlspecialchars($_GET['id']);
             $this->verifCompte();

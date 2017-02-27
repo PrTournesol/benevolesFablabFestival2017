@@ -17,6 +17,7 @@ class Compte
     public $dateInsc;
     public $idPhp;
     public $valide;
+    public $idBenevole;
 
     /**
      * Compte constructor.
@@ -29,8 +30,9 @@ class Compte
      * @param $dateInsc
      * @param $idPhp
      * @param $valide
+     * @param $idBenevole
      */
-    public function __construct($idCompte, $pseudo, $mail, $hashMdp, $dateDerCo, $typeCompte, $dateInsc, $idPhp, $valide)
+    public function __construct($idCompte, $pseudo, $mail, $hashMdp, $dateDerCo, $typeCompte, $dateInsc, $idPhp, $valide, $idBenevole)
     {
         $this->idCompte = $idCompte;
         $this->pseudo = $pseudo;
@@ -41,9 +43,7 @@ class Compte
         $this->dateInsc = $dateInsc;
         $this->idPhp = $idPhp;
         $this->valide = $valide;
+        $this->idBenevole = $idBenevole;
     }
-
-    
-
 
 }

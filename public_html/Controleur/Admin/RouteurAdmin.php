@@ -1,6 +1,8 @@
 <?php
 require_once 'Controleur/ControleurConnexion.php';
 require_once 'Controleur/Admin/ControleurCompte.php';
+require_once 'Controleur/Admin/ControleurBenevole.php';
+
 
 
 class RouteurAdmin {
@@ -52,7 +54,7 @@ class RouteurAdmin {
                             }
                             break;
                         case 'U' : 	// 'U' = Update = modification d'un média à partir de son id
-                            $ctrlCpt->setCompte($_GET['id']);
+                            $ctrlCpt->updateCompte($_GET['id']);
                             break;
                         case 'D' : 	// 'D' = Delete = suppression d'un média à partir de son id
                             $ctrlCpt->deleteCompte($_GET['id']);
@@ -63,29 +65,29 @@ class RouteurAdmin {
                     }
                     break;
 
-                case 'tournoi' :
-                    $ctrlTrn= new ControleurTournoi();
+                case 'benevole' :
+                    $ctrlTrn= new ControleurBenevole();
                     switch($_GET['action']) {
                         case 'C' :  // 'C' = Create = ajout d'un groupe...
-                            $ctrlTrn->createTournoi();
+                            $ctrlTrn->createBenevole();
                             break;
                         case 'R' : 	// 'R' = Read = lecture des groupes ou d'un seul s'il y a un parametre id
                             if (isset($_GET['id'])) {
-                                $ctrlTrn->getTournoiFromId($_GET['id']); // TODO
+                                $ctrlTrn->getBenevoleFromId($_GET['id']); // TODO
                             }
                             else {
-                                $ctrlTrn->getListeTournois();
+                                $ctrlTrn->getListeBenevoles();
                             }
                             break;
 
                         case 'U' : 	// 'U' = Update = modification d'un groupe à partir de son id
-                            $ctrlTrn->setTournoi($_GET['id']);
+                            $ctrlTrn->setBenevole($_GET['id']);
                             break;
                         case 'D' : 	// 'D' = Delete = suppression d'un groupe à partir de son id
-                            $ctrlTrn->deleteTournoi($_GET['id']);
+                            $ctrlTrn->deleteBenevole($_GET['id']);
                             break;
                         default: 	// pour toutes les autres valeurs, on affiche la liste des groupes
-                            $ctrlTrn->getListeTournois();
+                            $ctrlTrn->getListeBenevoles();
                             break;
                     }
                     break;
@@ -100,7 +102,7 @@ class RouteurAdmin {
                                 $ctrlCla->getClasse($_GET['id']); // TODO
                             }
                             elseif (isset($_GET['tournoi'])){
-                                $ctrlCla->getClassesFromTournoi($_GET['tournoi']);
+                                $ctrlCla->getClassesFromBenevole($_GET['tournoi']);
                             }
                             elseif (isset($_GET['compte'])){
                                 $ctrlCla->getClasseFromCompte($_GET['compte']);

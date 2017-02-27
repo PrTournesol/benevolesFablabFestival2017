@@ -39,7 +39,7 @@ class Routeur {
             // le cas connexion est appart car la variable session n'est pas
             // testée dans cette partie pour permettre la connexion
             if ($_GET['entite']=='validation'){
-                $ctrlVali->default();
+                $ctrlVali->defaut();
             }
             elseif ($_GET['entite']=='erreur'){
                 include 'Vue/VueErreur.php';

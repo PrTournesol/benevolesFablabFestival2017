@@ -8,11 +8,14 @@
  */
 
 include_once ('Modele/ModeleDispoChantier.php');
+include_once ('Modele/ModeleBenevole.php');
 
 class ControleurBeneChantier
 {
 
     private $disp;
+    private $bene;
+
 
     /**
      * ControlleurBenevole constructor.
@@ -20,6 +23,7 @@ class ControleurBeneChantier
     public function __construct()
     {
         $this->disp = new ModeleDispoChantier();
+        $this->bene = new ModeleBenevole();
     }
 
     public function addDispo()
@@ -78,8 +82,8 @@ class ControleurBeneChantier
 
     //        var_dump($dispos);
     }
-
-        include 'Vue/Membre/VueDispoChantier.php';
+        $vListeBenevoles= $this->bene->getListeBenevoles();
+        include 'Vue/Admin/VueChantier.php';
     }
 
 }

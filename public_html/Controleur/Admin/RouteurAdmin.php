@@ -2,7 +2,7 @@
 require_once 'Controleur/ControleurConnexion.php';
 require_once 'Controleur/Admin/ControleurCompte.php';
 require_once 'Controleur/Admin/ControleurBenevole.php';
-require_once 'Controleur/Admin/ControleurDispoChantier.php';
+require_once 'Controleur/Admin/ControleurBeneChantier.php';
 
 
 
@@ -97,34 +97,34 @@ class RouteurAdmin {
                     }
                     break;
                 case 'chantier' :
-                    $ctrlCla= new ControleurBeneChantier();
+                    $ctrlBeneCh= new ControleurBeneChantier();
                     switch($_GET['action']) {
                         case 'C' :  // 'C' = Create = ajout d'un groupe...
-                            $ctrlCla->createClasse();
+                            $ctrlBeneCh->addDispo();
                             break;
                         case 'R' : 	// 'R' = Read = lecture des groupes ou d'un seul s'il y a un parametre id
                             if (isset($_GET['id'])) {
-                                $ctrlCla->getClasse($_GET['id']); // TODO
+                                $ctrlBeneCh->getClasse($_GET['id']); // TODO
                             }
                             elseif (isset($_GET['tournoi'])){
-                                $ctrlCla->getClassesFromBenevole($_GET['tournoi']);
+                                $ctrlBeneCh->getClassesFromBenevole($_GET['tournoi']);
                             }
                             elseif (isset($_GET['compte'])){
-                                $ctrlCla->getClasseFromCompte($_GET['compte']);
+                                $ctrlBeneCh->getClasseFromCompte($_GET['compte']);
                             }
                             else {
-                                $ctrlCla->getListeClasses();
+                                $ctrlBeneCh->getListeClasses();
                             }
                             break;
 
                         case 'U' : 	// 'U' = Update = modification d'un groupe à partir de son id
-                            $ctrlCla->setClasse($_GET['id']);
+                            $ctrlBeneCh->setClasse($_GET['id']);
                             break;
                         case 'D' : 	// 'D' = Delete = suppression d'un groupe à partir de son id
-                            $ctrlCla->deleteClasse($_GET['id']);
+                            $ctrlBeneCh->deleteClasse($_GET['id']);
                             break;
                         default: 	// pour toutes les autres valeurs, on affiche la liste des groupes
-                            $ctrlCla->getListeClasses();
+                            $ctrlBeneCh->getListeClasses();
                             break;
                     }
                     break;

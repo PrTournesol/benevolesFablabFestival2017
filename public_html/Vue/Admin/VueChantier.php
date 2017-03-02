@@ -18,14 +18,37 @@
                     if (isset($message))
                         echo '<h1>'.$message.'</h1>';
                     else
-                        echo '<h1>Voici les personnes disponibles pour la semaine du '.$debut.' au '.$fin.'</h1>';
+                        echo '<h1>Veuillez choisir le bénévole pour rentrer ses disponibilités pour la semaine du '.$debut.' au '.$fin.'</h1>';
 
                 ?>
                 <center>
                     <br>
                     <form method="post" action="index.php?entite=chantier&action=C">
                     <input type="hidden" name="reponse">
+
                         <table border="2">
+                            <tr>
+                                <td colspan="8" align="center"><br>Bénévole :
+                                    <select name="benevole">
+                                        <?php
+                                        if (isset($vListeBenevoles) && count($vListeBenevoles) >= 1) {
+                                            foreach ($vListeBenevoles as $bene)
+                                            {
+                                                $val=$bene->idBenevole.' '.$bene->prenom.' '.$bene->nom.' ';
+                                                if ($bene->ville==null || $bene->ville=='' || $bene->ville=='NULL' || $bene->ville=='null')
+                                                    $val.='~ville non renseignée~';
+                                                else
+                                                    $val.=' '.$bene->ville;
+                                                echo '<option value="'.$bene->idBenevole.'">'.$val.'</option>';
+                                            }
+                                        }
+                                        else {
+                                            echo "Veuilles d'abord ajouter des bénévoles<BR/>";
+                                        }
+                                        ?>
+                                    </select><br><br>
+                                </td>
+                            </tr>
                         <tbody>
                             <tr><th>Date</th><th>Lundi 27 février</th><th>Mardi 28 février</th><th>Mercredi 1e mars</th><th>Jeudi 2 mars</th><th>Vendredi 3 mars</th><th>Samedi 4 mars</th><th>Dimanche 5 mars</th></tr>
                         </tbody>

@@ -2,6 +2,8 @@
 require_once 'Controleur/ControleurConnexion.php';
 require_once 'Controleur/Admin/ControleurCompte.php';
 require_once 'Controleur/Admin/ControleurBenevole.php';
+require_once 'Controleur/Admin/ControleurDispoChantier.php';
+
 
 
 
@@ -94,8 +96,8 @@ class RouteurAdmin {
                             break;
                     }
                     break;
-                case 'classe' :
-                    $ctrlCla= new ControleurClasse();
+                case 'chantier' :
+                    $ctrlCla= new ControleurBeneChantier();
                     switch($_GET['action']) {
                         case 'C' :  // 'C' = Create = ajout d'un groupe...
                             $ctrlCla->createClasse();

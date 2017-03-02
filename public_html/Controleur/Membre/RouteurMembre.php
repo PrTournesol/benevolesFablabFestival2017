@@ -38,7 +38,7 @@ class RouteurProf {
                     // on détermine quelle action (CRUD) on veut effectuer sur l'entité choisie
                     switch($_GET['action']) {
                         case 'C' :  // 'C' = Create = ajout d'un média...
-                            $ctrlCpt = new ControleurDispoChantier();
+                            $ctrlCpt = new ControleurBeneChantier();
                             $ctrlCpt->addDispo();
                             break;
                         case 'R' : 	// 'R' = Read = lecture des médias ou d'un seul s'il y a un parametre id

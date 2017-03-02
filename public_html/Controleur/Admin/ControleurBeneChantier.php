@@ -9,7 +9,7 @@
 
 include_once ('Modele/ModeleDispoChantier.php');
 
-class ControleurDispoChantier
+class ControleurBeneChantier
 {
 
     private $disp;

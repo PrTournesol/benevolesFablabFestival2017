@@ -92,14 +92,6 @@ class ModeleDispoChantier
             $return = "Problème d'enregistrement de a disponibilité, détail de l'erreur : <br>".$e->getMessage()."<br>";
         }
         return $return;
-
-
-
-
     }
-
-
-
-
 
 }

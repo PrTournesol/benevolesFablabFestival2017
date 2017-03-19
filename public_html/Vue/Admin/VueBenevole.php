@@ -23,6 +23,7 @@ include("./include/header.php");
                     <?php
                     echo '<tr><th>Prénom : </th><td>'.$vBenevole->prenom.'</td></tr>';
                     echo '<tr><th>Nom : </th><td>'.$vBenevole->nom.'</td></tr>';
+                    echo '<tr><th>Téléphone : </th><td>'.$vBenevole->telephone.'</td></tr>';
                     echo '<tr><th>Mission : </th><td>'.$vBenevole->mission.'</td></tr>';
                     echo '<tr><th>Ville : </th><td>'.$vBenevole->ville.'</td></tr>';
                     echo '<tr><th>Compétences : </th><td>'.$vBenevole->competences.'</td></tr>';
@@ -32,8 +33,11 @@ include("./include/header.php");
                     echo '<tr><th>Langues : </th><td>'.$vBenevole->langues.'</td></tr>';
                     echo '<tr><th>Festival : </th><td>'.$vBenevole->festival.'</td></tr>';
                     echo '<tr><th>Chantier : </th><td>'.$vBenevole->chantier.'</td></tr>';
+
+                    echo '</table>';
+                    echo '<br><br><br>';
+                    echo '<td align="center"><a href="index.php?entite=benevole&action=U&id='.$vBenevole->idBenevole.'"><img src="./Vue/images/modifier.jpg" alt="image modifier" height="30"></a></td>';
                     ?>
-                </table>
                 <br><br><br>
                 <a href="index.php?entite=benevole&action=R">Retour à la liste des bénévoles</a>
             </form>

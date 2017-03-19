@@ -3,7 +3,7 @@ require_once 'Controleur/ControleurConnexion.php';
 require_once 'Controleur/Admin/ControleurCompte.php';
 require_once 'Controleur/Membre/ControleurDispoChantier.php';
 
-class RouteurProf {
+class RouteurMembre {
     // Route une requête entrante : exécution la bonne méthode de contrôleur en fonction de l'URL
 
 
@@ -22,7 +22,7 @@ class RouteurProf {
 
     public static function getRouteur($pCtrlCo){
         if (is_null(self::$uniqueInstance)){
-            self::$uniqueInstance= new RouteurProf($pCtrlCo);
+            self::$uniqueInstance= new RouteurMembre($pCtrlCo);
         }
         return self::$uniqueInstance;
     }
@@ -38,7 +38,7 @@ class RouteurProf {
                     // on détermine quelle action (CRUD) on veut effectuer sur l'entité choisie
                     switch($_GET['action']) {
                         case 'C' :  // 'C' = Create = ajout d'un média...
-                            $ctrlCpt = new ControleurBeneChantier();
+                            $ctrlCpt = new ControleurDispoChantier();
                             $ctrlCpt->addDispo();
                             break;
                         case 'R' : 	// 'R' = Read = lecture des médias ou d'un seul s'il y a un parametre id

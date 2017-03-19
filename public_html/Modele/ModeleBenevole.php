@@ -28,6 +28,7 @@ class ModeleBenevole
                                 $cpt['idBenevole'],
                                 $cpt['nom'],
                                 $cpt['prenom'],
+                                $cpt['telephone'],
                                 $cpt['mission'],
                                 $cpt['ville'],
                                 $cpt['competences'],
@@ -58,6 +59,7 @@ class ModeleBenevole
             $cpt['idBenevole'],
             $cpt['nom'],
             $cpt['prenom'],
+            $cpt['telephone'],
             $cpt['mission'],
             $cpt['ville'],
             $cpt['competences'],
@@ -86,6 +88,7 @@ class ModeleBenevole
                 $cpt['idBenevole'],
                 $cpt['nom'],
                 $cpt['prenom'],
+                $cpt['telephone'],
                 $cpt['mission'],
                 $cpt['ville'],
                 $cpt['competences'],
@@ -104,8 +107,8 @@ class ModeleBenevole
     public function newBenevole($benevole){
         global $conn;
         try {
-            $res = $conn->prepare("INSERT INTO Benevole (nom, prenom, mission, ville, competences, infoCompl, conventionSignee, charteSignee, langues, festival, chantier) VALUES (:pNom,:pPrenom,:pMission,:pVille,:pCompetences,:pInfo,:pConv,:pCharte,:pLangues,:pFestival,:pChantier)");
-            $res->execute(array(':pNom'=>$benevole->nom,':pPrenom'=>$benevole->prenom,':pMission'=>$benevole->mission,':pVille'=>$benevole->ville,':pCompetences'=>$benevole->competences,':pInfo'=>$benevole->infoCompl,':pConv'=>$benevole->conventionSignee,':pCharte'=>$benevole->charteSignee,':pLangues'=>$benevole->langues,':pFestival'=>$benevole->festival,':pChantier'=>$benevole->chantier));
+            $res = $conn->prepare("INSERT INTO Benevole (nom, prenom, telephone, mission, ville, competences, infoCompl, conventionSignee, charteSignee, langues, festival, chantier) VALUES (:pNom,:pPrenom,:pTel,:pMission,:pVille,:pCompetences,:pInfo,:pConv,:pCharte,:pLangues,:pFestival,:pChantier)");
+            $res->execute(array(':pNom'=>$benevole->nom,':pPrenom'=>$benevole->prenom,':pTel'=>$benevole->telephone,':pMission'=>$benevole->mission,':pVille'=>$benevole->ville,':pCompetences'=>$benevole->competences,':pInfo'=>$benevole->infoCompl,':pConv'=>$benevole->conventionSignee,':pCharte'=>$benevole->charteSignee,':pLangues'=>$benevole->langues,':pFestival'=>$benevole->festival,':pChantier'=>$benevole->chantier));
             $return="Benevole  ".$benevole->prenom." ".$benevole->nom." crée avec succès";
 
         }
@@ -119,8 +122,8 @@ class ModeleBenevole
     public function updateBenevole($benevole){
         global $conn;
         try {
-            $res = $conn->prepare("UPDATE `Benevole` SET `nom`= :pNom, `prenom`=:pPrenom, `mission` = :pMission, `ville` = :pVille, `competences`= :pCompetences, `infoCompl`=:pInfo, `conventionSignee`=:pConv, `charteSignee`=:pCharte, `langues`=:pLangues,`festival`=:pFestival, `chantier`=:pChantier WHERE `idBenevole` = :pIdBenevole");
-            $res->execute(array('pIdBenevole'=>$benevole->idBenevole, 'pNom'=>$benevole->nom,'pPrenom'=>$benevole->prenom, 'pMission'=>$benevole->mission,'pVille'=>$benevole->ville,'pCompetences'=>$benevole->competences,'pInfo'=>$benevole->infoCompl,'pConv'=>$benevole->conventionSignee,'pCharte'=>$benevole->charteSignee,'pLangues'=>$benevole->langues,'pFestival'=>$benevole->festival,'pChantier'=>$benevole->chantier));
+            $res = $conn->prepare("UPDATE `Benevole` SET `nom`= :pNom, `prenom`=:pPrenom, `telephone`=:pTel, `mission` = :pMission, `ville` = :pVille, `competences`= :pCompetences, `infoCompl`=:pInfo, `conventionSignee`=:pConv, `charteSignee`=:pCharte, `langues`=:pLangues,`festival`=:pFestival, `chantier`=:pChantier WHERE `idBenevole` = :pIdBenevole");
+            $res->execute(array('pIdBenevole'=>$benevole->idBenevole, 'pNom'=>$benevole->nom,'pPrenom'=>$benevole->prenom,'pTel'=>$benevole->telephone, 'pMission'=>$benevole->mission,'pVille'=>$benevole->ville,'pCompetences'=>$benevole->competences,'pInfo'=>$benevole->infoCompl,'pConv'=>$benevole->conventionSignee,'pCharte'=>$benevole->charteSignee,'pLangues'=>$benevole->langues,'pFestival'=>$benevole->festival,'pChantier'=>$benevole->chantier));
             $return="Le Benevole avec le nom ".$benevole->nom." a été modifié avec succès";
         }
         catch (PDOException $e){

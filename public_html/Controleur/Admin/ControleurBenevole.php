@@ -38,6 +38,7 @@ class ControleurBenevole
         if (isset($_POST['nom'])){
             $nom=htmlspecialchars($_POST['nom']);
             $prenom=htmlspecialchars($_POST['prenom']);
+            $tel=$this->tel(htmlspecialchars($_POST['tel']));
             $mission=htmlspecialchars($_POST['mission']);
             $ville=htmlspecialchars($_POST['ville']);
             $competences=htmlspecialchars($_POST['competences']);
@@ -64,7 +65,7 @@ class ControleurBenevole
             if ($mail!='')
                 $infoCompl.='<mail>'.$mail.'</mail>';
             $infoCompl.='<idphp>'.uniqid().'</idphp>';
-            $benevole=new Benevole('',$nom,$prenom,$mission,$ville,$competences,$infoCompl,$conventionSignee,$charteSignee,$langues,$festival,$chantier,'');
+            $benevole=new Benevole('',$nom,$prenom,$tel,$mission,$ville,$competences,$infoCompl,$conventionSignee,$charteSignee,$langues,$festival,$chantier,'');
             $message = $this->bene->newBenevole($benevole);
             // Vérification, à commenter TODO
             $message = $message;
@@ -76,6 +77,7 @@ class ControleurBenevole
         if (isset($_POST['nom'])){
             $nom=htmlspecialchars($_POST['nom']);
             $prenom=htmlspecialchars($_POST['prenom']);
+            $tel=$this->tel(htmlspecialchars($_POST['tel']));
             $mission=htmlspecialchars($_POST['mission']);
             $ville=htmlspecialchars($_POST['ville']);
             $competences=htmlspecialchars($_POST['competences']);
@@ -98,7 +100,7 @@ class ControleurBenevole
                 $chantier=1;
             else
                 $chantier=0;
-            $benevole=new Benevole($idBenevole,$nom,$prenom,$mission,$ville,$competences,$infoCompl,$conventionSignee,$charteSignee,$langues,$festival,$chantier,'');
+            $benevole=new Benevole($idBenevole,$nom,$prenom,$tel, $mission,$ville,$competences,$infoCompl,$conventionSignee,$charteSignee,$langues,$festival,$chantier,'');
             $message = $this->bene->updateBenevole($benevole);
         }
         $vBenevole= $this->bene->getBenevoleFromId($idBenevole);
@@ -115,6 +117,18 @@ class ControleurBenevole
 
     }
 
+    private function tel($str) {
+        if(strlen($str) == 10) {
+            $res = substr($str, 0, 2) .' ';
+            $res .= substr($str, 2, 2) .' ';
+            $res .= substr($str, 4, 2) .' ';
+            $res .= substr($str, 6, 2) .' ';
+            $res .= substr($str, 8, 2) .' ';
+            return $res;
+        }
+        else
+            return $str;
+    }
 
 }
 

@@ -2,7 +2,7 @@
 require_once 'Controleur/ControleurConnexion.php';
 require_once 'Controleur/Admin/ControleurCompte.php';
 require_once 'Controleur/Admin/ControleurBenevole.php';
-require_once 'Controleur/Admin/ControleurBeneChantier.php';
+require_once 'Controleur/Admin/ControleurDispoChantierAdmin.php';
 
 
 
@@ -97,23 +97,17 @@ class RouteurAdmin {
                     }
                     break;
                 case 'chantier' :
-                    $ctrlBeneCh= new ControleurBeneChantier();
+                    $ctrlBeneCh= new ControleurDispoChantierAdmin();
                     switch($_GET['action']) {
                         case 'C' :  // 'C' = Create = ajout d'un groupe...
                             $ctrlBeneCh->addDispo();
                             break;
                         case 'R' : 	// 'R' = Read = lecture des groupes ou d'un seul s'il y a un parametre id
-                            if (isset($_GET['id'])) {
-                                $ctrlBeneCh->getClasse($_GET['id']); // TODO
-                            }
-                            elseif (isset($_GET['tournoi'])){
-                                $ctrlBeneCh->getClassesFromBenevole($_GET['tournoi']);
-                            }
-                            elseif (isset($_GET['compte'])){
-                                $ctrlBeneCh->getClasseFromCompte($_GET['compte']);
+                            if (isset($_GET['date'])) {
+                                $ctrlBeneCh->getDisposChantierFromDate($_GET['date']);
                             }
                             else {
-                                $ctrlBeneCh->getListeClasses();
+                                $ctrlBeneCh->getDisposChantierFromDate();
                             }
                             break;
 

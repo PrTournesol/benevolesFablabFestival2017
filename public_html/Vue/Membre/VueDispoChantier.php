@@ -19,7 +19,6 @@
                         echo '<h1>'.$message.'</h1>';
                     else
                         echo '<h1>Merci d\'indiquer vos disponibilités et si vous prenez le repas</h1>';
-
                 ?>
                 <center>
                     <br>
@@ -27,7 +26,7 @@
                     <input type="hidden" name="reponse">
                         <table border="2">
                         <tbody>
-                            <tr><th>Date</th><th>Lundi 27 février</th><th>Mardi 28 février</th><th>Mercredi 1e mars</th><th>Jeudi 2 mars</th><th>Vendredi 3 mars</th><th>Samedi 4 mars</th><th>Dimanche 5 mars</th></tr>
+                            <tr><th>Date</th><th>Lundi 27 mars</th><th>Mardi 28 mars</th><th>Mercredi 29 mars</th><th>Jeudi 30 mars</th><th>Vendredi 31 mars</th><th>Samedi 1e avril</th><th>Dimanche 5 mars</th></tr>
                         </tbody>
                         <tr>
                             <th rowspan="4">Disponibilités</th>

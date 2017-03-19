@@ -33,11 +33,11 @@ class ControleurDispoChantier
                 $message= 'Ce compte n\'est pas lié à un bénévole, vous ne pouvez donc pas renseigner vos disponibilités';
             }
             for ($i = 1; $i <= 28; $i++) {
-                $mois = 2;
+                $mois = 3;
                 $jour = 27 + ($i - 1) % 7;
-                if ($jour > 28) {
-                    $jour -= 28;
-                    $mois = 3;
+                if ($jour > 31) {
+                    $jour -= 31;
+                    $mois = 4;
                 }
                 $matin = 0;
                 $midi = 0;

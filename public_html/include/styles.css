@@ -217,3 +217,10 @@ contentNoCenter{
             0 1px 0 #2923cb,
             0 -1px 0 #fefff8;
 }
+
+
+td a{width:100%;display:block;}
+
+td {
+    text-align:center;
+}

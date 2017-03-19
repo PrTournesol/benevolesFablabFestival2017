@@ -62,7 +62,7 @@ class Routeur {
                         RouteurAdmin::getRouteur(Routeur::$ctrlCo)->routerRequete();
                     }
                     elseif ($_SESSION['typeCompte']=='Membre'){
-                        RouteurProf::getRouteur(Routeur::$ctrlCo)->routerRequete();
+                        RouteurMembre::getRouteur(Routeur::$ctrlCo)->routerRequete();
                     }
                     else{
                         header('Location:index.php');

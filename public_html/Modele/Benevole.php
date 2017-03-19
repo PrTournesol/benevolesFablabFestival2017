@@ -11,6 +11,7 @@ class Benevole
     public $idBenevole;
     public $nom;
     public $prenom;
+    public $telephone;
     public $mission;
     public $ville;
     public $competences;
@@ -27,6 +28,7 @@ class Benevole
      * @param $idBenevole
      * @param $nom
      * @param $prenom
+     * @param $telephone;
      * @param $mission
      * @param $ville
      * @param $competences
@@ -38,11 +40,12 @@ class Benevole
      * @param $chantier
      * @param $idCompte
      */
-    public function __construct($idBenevole, $nom, $prenom, $mission, $ville, $competences, $infoCompl, $conventionSignee, $charteSignee, $langues, $festival, $chantier, $idCompte)
+    public function __construct($idBenevole, $nom, $prenom,$telephone, $mission, $ville, $competences, $infoCompl, $conventionSignee, $charteSignee, $langues, $festival, $chantier, $idCompte)
     {
         $this->idBenevole = $idBenevole;
         $this->nom = $nom;
         $this->prenom = $prenom;
+        $this->telephone = $telephone;
         $this->mission = $mission;
         $this->ville = $ville;
         $this->competences = $competences;

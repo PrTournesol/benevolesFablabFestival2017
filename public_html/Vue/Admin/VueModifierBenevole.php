@@ -24,6 +24,7 @@ include("./include/header.php");
                     <?php
                     echo '<tr><th>Prénom : </th><td><input type="text" name="prenom" required value="'.$vBenevole->prenom.'"></td></tr>';
                     echo '<tr><th>Nom : </th><td><input type="text" name="nom" required value="'.$vBenevole->nom.'"></td></tr>';
+                    echo '<tr><th>Téléphone : </th><td><input type="text" name="tel" value="'.$vBenevole->telephone.'"></td></tr>';
                     echo '<tr><th>Mission : </th><td><input type="text" name="mission" value="'.$vBenevole->mission.'"></td></tr>';
                     echo '<tr><th>Ville : </th><td><input type="text" name="ville" value="'.$vBenevole->ville.'"></td></tr>';
                     echo '<tr><th>Compétences : </th><td><input type="text" name="competences" value="'.$vBenevole->competences.'"></td></tr>';

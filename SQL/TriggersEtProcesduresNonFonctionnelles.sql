@@ -30,3 +30,16 @@ CREATE PROCEDURE searchPatternIntoInfoCompl(IN chaine VARCHAR(10), OUT result IN
     END LOOP;
     CLOSE cur;
 END; //
+
+
+Trigger plus utilisé :
+
+CREATE TRIGGER t_insert_benevole_compte
+  AFTER INSERT ON Benevole FOR EACH ROW
+  BEGIN
+    DECLARE mail VARCHAR(35);
+		DECLARE idphp VARCHAR(13);
+    call extractStingBeginEnd(NEW.infoCompl,'<mail>','</mail>',@mail);
+		call extractStingBeginEnd(NEW.infoCompl,'<idphp>','</idphp>',@idphp);
+    INSERT INTO Compte(mail,valide,idBenevole,idphp) VALUES (@mail,1,NEW.idBenevole,@idphp);
+END//

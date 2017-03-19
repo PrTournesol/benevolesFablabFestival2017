@@ -22,6 +22,7 @@ include("./include/header.php");
                 <table border="2">
                     <tr><th>Prénom : </th><td><input type="text" name="prenom" required></td></tr>
                     <tr><th>Nom : </th><td><input type="text" name="nom" required></td></tr>
+                    <tr><th>Téléphone : </th><td><input type="text" name="tel" ></td></tr>
                     <tr><th>Mission : </th><td><input type="text" name="mission" ></td></tr>
                     <tr><th>Ville : </th><td><input type="text" name="ville" ></td></tr>
                     <tr><th>Compétences : </th><td><input type="text" name="competences" ></td></tr>

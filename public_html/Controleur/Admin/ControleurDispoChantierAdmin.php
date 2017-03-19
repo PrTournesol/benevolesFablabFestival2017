@@ -10,12 +10,11 @@
 include_once ('Modele/ModeleDispoChantier.php');
 include_once ('Modele/ModeleBenevole.php');
 
-class ControleurBeneChantier
+class ControleurDispoChantierAdmin
 {
 
     private $disp;
     private $bene;
-
 
     /**
      * ControlleurBenevole constructor.
@@ -31,17 +30,15 @@ class ControleurBeneChantier
 //        var_dump($_POST);
 //        var_dump($_SESSION);
         $message='';
-        if (isset($_POST['reponse'])) {
-            $idBene = $_SESSION['compte']->idBenevole;
-            if ($idBene==null || $idBene==''){
-                $message= 'Ce compte n\'est pas lié à un bénévole, vous ne pouvez donc pas renseigner vos disponibilités';
-            }
+        $vListeBenevoles= $this->bene->getListeBenevoles();
+        if (isset($_POST['reponse']) && isset($_POST['benevole'])) {
+            $idBene = $_POST['benevole'];
             for ($i = 1; $i <= 28; $i++) {
-                $mois = 2;
+                $mois = 3;
                 $jour = 27 + ($i - 1) % 7;
-                if ($jour > 28) {
-                    $jour -= 28;
-                    $mois = 3;
+                if ($jour > 31) {
+                    $jour -= 31;
+                    $mois = 4;
                 }
                 $matin = 0;
                 $midi = 0;
@@ -74,18 +71,35 @@ class ControleurBeneChantier
     //            echo '<br>i='.$i.' jour='.$jour.' mois='.$mois;
             }
             foreach ($dispos as $disp) {
-                if ($this->disp->getDisposChantierFromBenevoleAndDate($idBene,$disp->date)!=null)
-                    $message.= 'Dispo du '.$disp->date.' déjà enregistrée';
-                else
+                if ($this->disp->getDisposChantierFromBenevoleAndDate($idBene,$disp->date)!=null){
+                    $benevole = $this->bene->getBenevoleFromId($idBene);
+                    $val=$benevole->idBenevole.' '.$benevole->prenom.' '.$benevole->nom.' ';
+                    if ($benevole->ville==null || $benevole->ville=='' || $benevole->ville=='NULL' || $benevole->ville=='null')
+                        $val.='~ville non renseignée~';
+                    else
+                        $val.=' '.$benevole->ville;
+                    $message.= 'Dispo du '.$disp->date.' déjà enregistrée pour le bénévole '.$val;
+                }
+                else{
                     $message.= $this->disp->newDispoChantier($disp).'<br>';
+                }
             }
-
     //        var_dump($dispos);
     }
-        $vListeBenevoles= $this->bene->getListeBenevoles();
-        include 'Vue/Admin/VueChantier.php';
+        include 'Vue/Admin/VueDispoChantierAdmin.php';
     }
 
-}
+    public function getDisposChantierFromDate($date=null){
+        if (isset($date)){
+            $vDispos=$this->disp->countDisposChantierFromDate($date);
+            $vBene=$this->disp->getDisposChantierFromDate($date);
+        }
+        $vDates=$this->disp->getDates();
+        include 'Vue/Admin/VueBeneChantierAdmin.php';
 
+    }
+
+
+
+}
 ?>

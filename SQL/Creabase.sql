@@ -21,6 +21,7 @@ CREATE TABLE Benevole(
 	idBenevole INT(4) auto_increment,
 	nom VARCHAR(20),
 	prenom VARCHAR(20),
+	telephone VARCHAR(25),
 	mission VARCHAR(20),
 	ville VARCHAR(20),
 	competences VARCHAR(100),
@@ -88,15 +89,6 @@ create PROCEDURE extractStingBeginEnd(IN chaine VARCHAR(500), IN chDebut VARCHAR
 END//
 
 
-CREATE TRIGGER t_insert_benevole_compte
-  AFTER INSERT ON Benevole FOR EACH ROW
-  BEGIN
-    DECLARE mail VARCHAR(35);
-		DECLARE idphp VARCHAR(13);
-    call extractStingBeginEnd(NEW.infoCompl,'<mail>','</mail>',@mail);
-		call extractStingBeginEnd(NEW.infoCompl,'<idphp>','</idphp>',@idphp);
-    INSERT INTO Compte(mail,valide,idBenevole,idphp) VALUES (@mail,1,NEW.idBenevole,@idphp);
-END//
 
 
 CREATE TRIGGER t_delete_compte_benevole
